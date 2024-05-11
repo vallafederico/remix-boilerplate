@@ -1,11 +1,21 @@
 import { NavLink } from "@remix-run/react";
 import cx from "classix";
 
+const prefetch = "viewport";
+
 const NAV = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
+
+/* <Link
+  to={{
+    pathname: "/some/path",
+    search: "?query=string",
+    hash: "#hash",
+  }}
+/>; */
 
 export function Nav() {
   return (
@@ -14,6 +24,7 @@ export function Nav() {
         {NAV.map((nav) => (
           <li key={nav.href}>
             <NavLink
+              prefetch={prefetch}
               to={nav.href}
               className={({ isActive, isPending }) =>
                 cx(

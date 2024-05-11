@@ -6,6 +6,7 @@ export default {
     colors: {
       black: "#000",
       white: "#fff",
+      red: "#f00",
     },
     fontSize: {
       base: "12px",

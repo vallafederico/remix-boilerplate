@@ -5,12 +5,14 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteError,
+  isRouteErrorResponse,
 } from "@remix-run/react";
 
 import tailwind from "~/tailwind.css?url";
 
 import { Scroll } from "./components/Scroll";
 import { Nav } from "./components/Nav";
+import { Canvas } from "./components/Canvas";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
@@ -30,9 +32,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Nav />
         <Scroll>
           {children}
-          {/* <ScrollRestoration /> */}
+          <ScrollRestoration />
           <Scripts />
         </Scroll>
+
+        <Canvas />
       </body>
     </html>
   );
@@ -42,14 +46,29 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }: { error: Error }) {
-  const routeError = useRouteError();
+/** -- Error */
+export function ErrorBoundary() {
+  const error = useRouteError();
 
-  return (
-    <Layout>
-      <h1>App Error</h1>
-      <pre>{error.message}</pre>
-      {routeError ? <pre>{routeError.message}</pre> : null}
-    </Layout>
-  );
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </div>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
 }
