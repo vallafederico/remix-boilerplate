@@ -7,7 +7,15 @@ export default {
       black: "#000",
       white: "#fff",
     },
-    extend: {},
+    fontSize: {
+      base: "12px",
+    },
+    extend: {
+      spacing: {
+        gx: "5vw",
+        gy: "2em",
+      },
+    },
   },
   plugins: [],
 } satisfies Config;

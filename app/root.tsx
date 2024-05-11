@@ -9,7 +9,8 @@ import {
 
 import tailwind from "~/tailwind.css?url";
 
-import { Scroll } from "./components/scroll";
+import { Scroll } from "./components/Scroll";
+import { Nav } from "./components/Nav";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
@@ -25,7 +26,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
 
-      <body className="bg-black text-white">
+      <body className="bg-black text-base text-white">
+        <Nav />
         <Scroll>
           {children}
           {/* <ScrollRestoration /> */}

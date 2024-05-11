@@ -8,6 +8,6 @@
   }
 
   .section {
-    @apply min-h-screen border flex-center;
+    @apply flex-center min-h-screen;
   }
 }
