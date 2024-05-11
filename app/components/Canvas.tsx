@@ -1,11 +1,11 @@
 import { Gl } from "~/gl/";
 
-import { useEffect, useRef } from "react";
+import { useRef, useLayoutEffect } from "react";
 
 export function Canvas() {
   const canvasRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Gl.init(canvasRef.current!);
   }, []);
 
