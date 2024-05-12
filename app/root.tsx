@@ -15,11 +15,38 @@ import { useNavigationCallback } from "./hooks/useNavigationCallback";
 
 import { Gl } from "./gl";
 
+import { DEFAULT_CACHE } from "./utils/";
+
 import tailwind from "~/tailwind.css?url";
+import type {
+  LinksFunction,
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
 ];
+
+export const action = async ({ request }): ActionFunctionArgs => {
+  // console.log(request);
+
+  return { data: "hello" };
+};
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  // console.log(request);
+
+  return json(
+    { ok: true, data: "hello" },
+    {
+      headers: {
+        ...DEFAULT_CACHE,
+      },
+    },
+  );
+};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   useNavigationCallback(Gl.page.bind(Gl));

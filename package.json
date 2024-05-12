@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@darkroom.engineering/tempus": "^0.0.46",
+    "@nasa-gcn/remix-seo": "^2.0.0",
     "@remix-run/node": "^2.9.2",
     "@remix-run/react": "^2.9.2",
     "@remix-run/serve": "^2.9.2",
