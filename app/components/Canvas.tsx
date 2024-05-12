@@ -1,13 +1,24 @@
 import { Gl } from "~/gl/";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+
+import {
+  useDebounceCallback,
+  useResizeObserver,
+  useIsomorphicLayoutEffect,
+} from "usehooks-ts";
 
 export function Canvas() {
   const canvasRef = useRef<HTMLDivElement | null>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     Gl.init(canvasRef.current!);
   }, []);
+
+  useResizeObserver({
+    ref: canvasRef,
+    onResize: useDebounceCallback((data) => Gl.resize(data), 100),
+  });
 
   return (
     <div

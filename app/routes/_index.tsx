@@ -6,12 +6,16 @@ import { META, DEFAULT_CACHE } from "~/utils/";
 export const meta: MetaFunction = () => [...META];
 export const headers: HeadersFunction = () => DEFAULT_CACHE;
 
+import { Track } from "~/components/animation/Track";
+
 export default function Index() {
   return (
     <>
       <h1>Home</h1>
       <div className="section">
-        <div className="h-[10vw] w-[10vw] border"></div>
+        <Track>
+          <div className="border-red h-[10vw] w-[10vw] border"></div>
+        </Track>
       </div>
       <div className="section">
         <div className="h-[10vw] w-[10vw] border"></div>
