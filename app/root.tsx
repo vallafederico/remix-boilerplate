@@ -8,17 +8,22 @@ import {
   isRouteErrorResponse,
 } from "@remix-run/react";
 
-import tailwind from "~/tailwind.css?url";
-
 import { Scroll } from "./components/Scroll";
 import { Nav } from "./components/Nav";
 import { Canvas } from "./components/Canvas";
+import { useNavigationCallback } from "./hooks/useNavigationCallback";
+
+import { Gl } from "./gl";
+
+import tailwind from "~/tailwind.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  useNavigationCallback(Gl.page.bind(Gl));
+
   return (
     <html lang="en">
       <head>

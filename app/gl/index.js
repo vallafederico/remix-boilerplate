@@ -5,13 +5,18 @@ export class Gl {
   static isInitialized = false;
   static items = new Map();
   static isActive = false;
+  static scrollRef = null;
+
+  // static {
+  // console.log("gl:static init");
+  // this.value = 10;
+  // }
 
   static init(wrapper) {
     if (!wrapper) throw new Error("Wrapper is required");
     if (this.isInitialized) return;
 
     this.isInitialized = true;
-    // console.log("init gl", canvas);
 
     // maybe can be removed
     this.resize({
@@ -21,10 +26,6 @@ export class Gl {
 
     this.isActive = true;
     Tempus.add(this.render.bind(this));
-
-    // queueMicrotask(() => {
-    //   console.log("creating webgl things");
-    // });
   }
 
   static addFromDom(el, id) {
@@ -52,6 +53,10 @@ export class Gl {
   static render(time) {
     if (!this.isActive) return;
     // console.log(time);
+  }
+
+  static page(name) {
+    this.scrollRef.scrollTo(0, { immediate: true });
   }
 }
 

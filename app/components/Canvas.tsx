@@ -1,4 +1,5 @@
 import { Gl } from "~/gl/";
+import { useLenis } from "lenis/react";
 
 import { useRef } from "react";
 
@@ -18,6 +19,10 @@ export function Canvas() {
   useResizeObserver({
     ref: canvasRef,
     onResize: useDebounceCallback((data) => Gl.resize(data), 100),
+  });
+
+  useLenis(({ scroll, direction, velocity }) => {
+    Gl.scroll({ scroll, direction, velocity });
   });
 
   return (
